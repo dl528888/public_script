@@ -1,8 +1,8 @@
 #!/usr/bin/env python
+#coding=utf-8
 #Author: Denglei
 #Email: dl528888@gmail.com
 #QQ: 244979152
-#coding=utf-8
 import MySQLdb
 import datetime
 import xlwt
