@@ -116,7 +116,7 @@ if __name__ == "__main__":
     if sys.getdefaultencoding() != default_encoding:
         reload(sys)
         sys.setdefaultencoding(default_encoding)
-    if os.path.exists("/tmp/zabbix_log/"):
+    if os.path.exists("/tmp/zabbix_log/") is False:
         os.mkdir("/tmp/zabbix_log/")
     conn=MySQLdb.connect(host='10.10.14.19',user='zabbix',passwd='zabbix',port=3306,charset="utf8")
     cur=conn.cursor()
