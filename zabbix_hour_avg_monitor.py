@@ -63,9 +63,9 @@ def cover_excel(msg,start_time):
                 value=x[0]
             else:
                 value=x[i]
-      if isinstance(value[j],long) or isinstance(value[j],int) or isinstance(value[j],float):
-    ws.write(i,j,value[j])
-      else:
+            if isinstance(value[j],long) or isinstance(value[j],int) or isinstance(value[j],float):
+                ws.write(i,j,value[j])
+            else:
                 ws.write(i,j,value[j].decode('utf8'))
     #wb.save('/tmp/zabbix_log/chance_zabbix_monitor_test.xls')
 def run_select(start_time,end_time):
@@ -86,32 +86,31 @@ def run_select(start_time,end_time):
     msg=[list(i) for i in cpu_num_result]
     for i in msg:
         for ii in cpu_idle_result:
-      if i[0] ==ii[0] and i[1] == ii[1] and i[2] == ii[2]:
-    i[3]=int(i[3])
-    #msg.append([i[0],i[1],i[2],int(i[3]),ii[3]])
-    i.append(int(ii[3]))
-  for iii in mem_avai_result:
-      if i[0] ==iii[0] and i[1] == iii[1] and i[2] == iii[2]:
-    i.append(round(float(iii[3]),2))
-  for iiii in mem_total_result:
-      if i[0] ==iiii[0] and i[1] == iiii[1] and i[2] == iiii[2]:
-          i.append(int(iiii[3]))
-  for a in em2_in_result:
-      if i[0] == a[0] and i[1] == a[1] and i[2] == a[2]:
-    i.append(int(a[3]))
+            if i[0] ==ii[0] and i[1] == ii[1] and i[2] == ii[2]:
+                i[3]=int(i[3])
+                i.append(int(ii[3]))
+        for iii in mem_avai_result:
+            if i[0] ==iii[0] and i[1] == iii[1] and i[2] == iii[2]:
+                i.append(round(float(iii[3]),2))
+        for iiii in mem_total_result:
+            if i[0] ==iiii[0] and i[1] == iiii[1] and i[2] == iiii[2]:
+                i.append(int(iiii[3]))
+        for a in em2_in_result:
+            if i[0] == a[0] and i[1] == a[1] and i[2] == a[2]:
+                i.append(int(a[3]))
         if len(i) == 7:
-      i.append(0)
-  for b in em2_out_result:
-      if i[0] == b[0] and i[1] == b[1] and i[2] == b[2]:
-    i.append(int(b[3]))
-  if len(i) == 8:
-      i.append(0)
+            i.append(0)
+        for b in em2_out_result:
+            if i[0] == b[0] and i[1] == b[1] and i[2] == b[2]:
+                i.append(int(b[3]))
+        if len(i) == 8:
+            i.append(0)
     cover_excel(msg,start_time)
 def main():
     for i in range(7,0,-1):
         start_time=((datetime.datetime.now() - datetime.timedelta(days = i))).strftime("%Y-%m-%d")
         end_time=((datetime.datetime.now() - datetime.timedelta(days = i-1))).strftime("%Y-%m-%d")
-  run_select(start_time,end_time)
+        run_select(start_time,end_time)
 if __name__ == "__main__":
     default_encoding = 'utf-8'
     if sys.getdefaultencoding() != default_encoding:
